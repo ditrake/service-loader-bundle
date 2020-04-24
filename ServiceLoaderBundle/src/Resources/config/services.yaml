@@ -1,0 +1,49 @@
+services:
+  srr_paths_finder:
+    class: srr\ServiceLoader\Service\PathFinder\PathFinder
+    autowire: true
+    public: true
+
+  srr\ServiceLoader\Service\PathFinder\PathFinderInterface: '@srr_paths_finder'
+
+  srr_service_loader:
+    class: srr\ServiceLoader\Service\Loader\ServiceLoader
+    autowire: true
+    public: true
+
+  srr\ServiceLoader\Service\Loader\ServiceLoaderInterface: '@srr_service_loader'
+
+  service_loader_decorator:
+    class: srr\ServiceLoader\Service\Loader\ServiceLoaderDecorator
+    decorates: srr_service_loader
+    arguments: ['@service_loader_decorator.inner']
+
+parameters:
+  services:
+    adp:
+      v1:
+        v2:
+          pdf:
+            - 'rabotaru'
+            - 'hh'
+            - 'superjob'
+      doc:
+        - 'rabotaru'
+        - 'hh'
+        - 'superjob'
+      html:
+        - 'rabotaru'
+        - 'hh'
+        - 'superjob'
+      rtf:
+        - 'rabotaru'
+        - 'hh'
+        - 'superjob'
+    tdp:
+      - hex:
+          - 'pdf'
+      - dot:
+          - 'pdf'
+      - 'doc'
+      - 'html'
+      - 'rtf'
